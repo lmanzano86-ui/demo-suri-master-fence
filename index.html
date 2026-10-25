@@ -52,7 +52,7 @@ p,li{font-size:17px;line-height:1.65}
 #qSummary{background:#fff;color:#1a1a1a;border-radius:12px;padding:16px;margin-top:16px;white-space:pre-line;line-height:1.6}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .step{text-align:center}.step b{font-size:36px;color:#ea580c}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0;scroll-margin-top:150px}
 .tab{border:2px solid #0f2a4a;background:#fff;color:#0f2a4a;border-radius:999px;padding:11px 18px;font-weight:bold;cursor:pointer;font-size:16px}
 .tab.on{background:#f97316;border-color:#f97316;color:#fff}
 .matPanel{display:none}.matPanel.on{display:block}
@@ -80,7 +80,7 @@ nav{display:none;flex-direction:column;overflow:visible}
 nav.open{display:flex}
 .hero-in,.grid,.contact{grid-template-columns:1fr}.hero h1{font-size:34px}.gal{grid-template-columns:1fr 1fr}.fence{height:140px}
 }
-.matphoto{width:100%;border-radius:14px;border:2px solid #0f2a4a;margin:12px 0}.gal img{width:100%;border-radius:14px;border:2px solid #0f2a4a}
+.matphoto{width:100%;max-height:62vh;object-fit:contain;display:block;background:#0f2a4a;border-radius:14px;border:2px solid #0f2a4a;margin:12px 0}.gal img{width:100%;border-radius:14px;border:2px solid #0f2a4a}
 </style>
 </head>
 <body>
@@ -213,7 +213,7 @@ var LANG='es';
 function setLang(l){LANG=l;document.documentElement.lang=l;document.querySelectorAll('[data-es]').forEach(function(e){e.innerHTML=e.getAttribute(l==='es'?'data-es':'data-en')});document.getElementById('btn-es').className=l==='es'?'on':'';document.getElementById('btn-en').className=l==='en'?'on':'';updateSummary();rotateMsg(true)}
 function toggleMenu(){document.getElementById('mainNav').classList.toggle('open')}
 document.querySelectorAll('#mainNav a').forEach(function(a){a.addEventListener('click',function(){document.getElementById('mainNav').classList.remove('open')})});
-function showMat(id,btn){document.querySelectorAll('.matPanel').forEach(function(p){p.classList.remove('on')});document.getElementById('mat-'+id).classList.add('on');var tabs=btn.parentNode.querySelectorAll('.tab');tabs.forEach(function(t){t.classList.remove('on')});btn.classList.add('on')}
+function showMat(id,btn){document.querySelectorAll('.matPanel').forEach(function(p){p.classList.remove('on')});document.getElementById('mat-'+id).classList.add('on');var tabs=btn.parentNode.querySelectorAll('.tab');tabs.forEach(function(t){t.classList.remove('on')});btn.classList.add('on');document.querySelector('.tabs').scrollIntoView({behavior:'smooth',block:'start'})}
 function filterGal(mat,btn){var tabs=btn.parentNode.querySelectorAll('.tab');tabs.forEach(function(t){t.classList.remove('on')});btn.classList.add('on');document.querySelectorAll('.gal div').forEach(function(d){d.style.display=(mat==='all'||d.getAttribute('data-mat')===mat)?'':'none'})}
 function toggleFaq(btn){var a=btn.nextElementSibling;var open=a.classList.contains('open');document.querySelectorAll('.faq .a').forEach(function(x){x.classList.remove('open')});if(!open){a.classList.add('open')}}
 function quoteMat(mat){var s=document.getElementById('qMaterial');for(var i=0;i<s.options.length;i++){if(s.options[i].value===mat){s.selectedIndex=i}}document.getElementById('cotizar').scrollIntoView({behavior:'smooth'});updateSummary()}
